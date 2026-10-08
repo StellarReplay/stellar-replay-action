@@ -1,0 +1,23 @@
+name: Stellar Replay
+description: Validate or replay Stellar RPC fixtures through the released Stellar Replay CLI.
+author: StellarReplay
+branding:
+  color: blue
+  icon: refresh-cw
+inputs:
+  fixture:
+    description: Path to a Stellar Replay fixture.
+    required: true
+  command:
+    description: Core command to run once the released Action integration is available.
+    required: false
+    default: validate
+runs:
+  using: composite
+  steps:
+    - name: Pre-release guard
+      shell: bash
+      run: |
+        echo "::error::stellar-replay-action is not released yet; use the core CLI directly after a stable release."
+        exit 1
+
