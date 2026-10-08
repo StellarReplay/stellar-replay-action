@@ -10,6 +10,8 @@ Repository foundation only. The core CLI has not reached a released interface, s
 
 The eventual Action will accept a fixture path and validation/replay options, invoke a pinned released core version, and surface failures through the workflow exit status and logs. Core fixture semantics remain owned by the core repository.
 
+The current frozen v0.1 boundary and request semantics are defined by the core repository's [Phase 1 decision record](https://github.com/StellarReplay/stellar-replay/blob/main/docs/PHASE_1_DECISION.md). This repository does not redefine them.
+
 ## Development
 
 Validate `action.yml` structure and workflow YAML locally. Integration tests will be added when the core CLI interface is released. Do not add blockchain credentials or live-network requirements to default Action tests.
