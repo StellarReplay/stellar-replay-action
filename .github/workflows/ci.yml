@@ -12,7 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - name: Check required metadata
+      - name: Validate action metadata and contract
         shell: bash
-        run: test -s action.yml && test -s README.md
-
+        run: bash tests/validate-action.sh action.yml
+      - name: Check required documentation
+        shell: bash
+        run: test -s README.md && test -s LICENSE
