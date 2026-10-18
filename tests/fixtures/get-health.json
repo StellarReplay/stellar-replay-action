@@ -4,7 +4,7 @@
   "provenance": {
     "endpoint": "https://soroban-testnet.stellar.org",
     "network": "testnet",
-    "toolVersion": "stellar-replay/action-test"
+    "toolVersion": "stellar-replay/phase7-example"
   },
   "request": {
     "jsonrpc": "2.0",
