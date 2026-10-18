@@ -21,9 +21,64 @@ jobs:
       - name: Run offline contract checks
         shell: bash
         run: bash tests/test-action-contract.sh
-      - name: Offline fixture validation smoke test
+
+  smoke:
+    name: offline-${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v5
+      - name: Validate synthetic fixture
         uses: ./
         with:
           fixture: tests/fixtures/get-health.json
           command: validate
           core-version: 0.1.0
+      - name: Replay synthetic fixture
+        uses: ./
+        with:
+          fixture: tests/fixtures/get-latest-ledger.json
+          command: replay
+          method: getLatestLedger
+          core-version: 0.1.0
+      - name: Reject missing fixture
+        id: missing-fixture
+        continue-on-error: true
+        uses: ./
+        with:
+          fixture: tests/fixtures/does-not-exist.json
+          command: validate
+          core-version: 0.1.0
+      - name: Assert missing fixture failed closed
+        if: steps.missing-fixture.outcome != 'failure'
+        shell: bash
+        run: exit 1
+
+  negative-contract:
+    name: negative-contract
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Check shell syntax
+        shell: bash
+        run: bash -n scripts/run-action.sh tests/validate-action.sh tests/test-action-contract.sh
+      - name: Check PowerShell syntax
+        shell: pwsh
+        run: |
+          $errors = $null
+          [System.Management.Automation.Language.Parser]::ParseFile("scripts/run-action.ps1", [ref]$null, [ref]$errors) | Out-Null
+          if ($errors) { throw ($errors | Out-String) }
+      - name: Reject unsupported core version
+        id: unsupported-version
+        continue-on-error: true
+        uses: ./
+        with:
+          fixture: tests/fixtures/get-health.json
+          command: validate
+          core-version: 99.99.99
+      - name: Assert unsupported version failed closed
+        if: steps.unsupported-version.outcome != 'failure'
+        run: exit 1
