@@ -1,10 +1,15 @@
 # Changelog
 
-## Unreleased
+## v0.1.0 - 2026-10-18
 
 - Implemented offline `validate` and `replay` integration using the released
   core v0.1.0 binary with SHA-256 checksum verification.
 - Added cross-platform runner paths and deterministic contract/smoke checks.
+
+- Published the first versioned Action release, pinned to core v0.1.0 and
+  fixture schema v1.
+
+## Unreleased
 
 ## Unreleased
 

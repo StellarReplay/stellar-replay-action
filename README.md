@@ -21,8 +21,8 @@ GitHub Actions integration for [Stellar Replay](https://github.com/StellarReplay
 
 ## Status
 
-The Action is implemented on `main` but has no Action release tag yet. It
-downloads the pinned core v0.1.0 release, verifies its published SHA-256
+The Action is released as `v0.1.0`. It downloads the pinned core v0.1.0
+release, verifies its published SHA-256
 checksum, and runs `validate` or `replay` without wallet credentials or a live
 RPC endpoint. It remains a thin integration layer and does not copy the Go
 engine.
@@ -30,7 +30,7 @@ engine.
 ## Usage
 
 ```yaml
-- uses: StellarReplay/stellar-replay-action@main
+- uses: StellarReplay/stellar-replay-action@v0.1.0
   with:
     fixture: fixtures/get-health.json
     command: validate
@@ -40,7 +40,7 @@ engine.
 For deterministic replay:
 
 ```yaml
-- uses: StellarReplay/stellar-replay-action@main
+- uses: StellarReplay/stellar-replay-action@v0.1.0
   with:
     fixture: fixtures/get-health.json
     command: replay
@@ -63,4 +63,7 @@ requirements to Action tests.
 
 ## Versioning
 
-The Action has its own semantic version and major-version tags. Compatibility with the supported core CLI and fixture schema is documented in each Action release. It must never depend on an unreleased core commit.
+The Action has its own semantic version and major-version tags. `v0.1.0`
+supports core `v0.1.0` and fixture schema v1. Compatibility with the supported
+core CLI and fixture schema is documented in each Action release. It must never
+depend on an unreleased core commit.
