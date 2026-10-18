@@ -18,3 +18,12 @@ jobs:
       - name: Check required documentation
         shell: bash
         run: test -s README.md && test -s LICENSE
+      - name: Run offline contract checks
+        shell: bash
+        run: bash tests/test-action-contract.sh
+      - name: Offline fixture validation smoke test
+        uses: ./
+        with:
+          fixture: tests/fixtures/get-health.json
+          command: validate
+          core-version: 0.1.0

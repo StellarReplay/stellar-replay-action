@@ -1,5 +1,5 @@
 name: Stellar Replay
-description: Validate or replay Stellar RPC fixtures through the released Stellar Replay CLI.
+description: Validate or replay Stellar RPC fixtures with a pinned released Stellar Replay CLI.
 author: StellarReplay
 branding:
   color: blue
@@ -9,15 +9,51 @@ inputs:
     description: Path to a Stellar Replay fixture.
     required: true
   command:
-    description: Core command to run once the released Action integration is available.
+    description: Core command to run (validate or replay).
     required: false
     default: validate
+  method:
+    description: Replay method when command is replay.
+    required: false
+  params:
+    description: JSON replay parameters when command is replay.
+    required: false
+  request-file:
+    description: JSON-RPC request file when command is replay.
+    required: false
+  core-version:
+    description: Released core version to download.
+    required: false
+    default: 0.1.0
+  core-repository:
+    description: Core repository that publishes the release.
+    required: false
+    default: StellarReplay/stellar-replay
 runs:
   using: composite
   steps:
-    - name: Pre-release guard
+    - name: Download and verify Stellar Replay (Unix)
+      if: runner.os != 'Windows'
       shell: bash
-      run: |
-        echo "::error::stellar-replay-action is not released yet; use the core CLI directly after a stable release."
-        exit 1
+      env:
+        STELLAR_REPLAY_FIXTURE: ${{ inputs.fixture }}
+        STELLAR_REPLAY_COMMAND: ${{ inputs.command }}
+        STELLAR_REPLAY_METHOD: ${{ inputs.method }}
+        STELLAR_REPLAY_PARAMS: ${{ inputs.params }}
+        STELLAR_REPLAY_REQUEST_FILE: ${{ inputs.request-file }}
+        STELLAR_REPLAY_CORE_VERSION: ${{ inputs.core-version }}
+        STELLAR_REPLAY_CORE_REPOSITORY: ${{ inputs.core-repository }}
+      run: bash "${{ github.action_path }}/scripts/run-action.sh"
+    - name: Download and verify Stellar Replay (Windows)
+      if: runner.os == 'Windows'
+      shell: pwsh
+      env:
+        STELLAR_REPLAY_FIXTURE: ${{ inputs.fixture }}
+        STELLAR_REPLAY_COMMAND: ${{ inputs.command }}
+        STELLAR_REPLAY_METHOD: ${{ inputs.method }}
+        STELLAR_REPLAY_PARAMS: ${{ inputs.params }}
+        STELLAR_REPLAY_REQUEST_FILE: ${{ inputs.request-file }}
+        STELLAR_REPLAY_CORE_VERSION: ${{ inputs.core-version }}
+        STELLAR_REPLAY_CORE_REPOSITORY: ${{ inputs.core-repository }}
+      run: pwsh -NoProfile -File "${{ github.action_path }}/scripts/run-action.ps1"
 
