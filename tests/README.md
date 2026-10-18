@@ -1,6 +1,7 @@
 # Tests
 
-Action metadata and workflow checks belong here. The core CLI v0.1.0 is now
-released, but integration tests remain deferred until the Action invocation and
-version-pinning contract is approved. Default checks must remain network-free.
+Action metadata and workflow checks belong here. The Action consumes the
+released core CLI without copying its Go engine. Default checks validate the
+contract and remain network-free; the hosted offline smoke test uses a checked-
+in synthetic fixture and the public v0.1.0 release.
 
