@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.1 - 2026-10-20
+
+- Updated the Action to consume and verify the released core `v0.1.1`.
+- Published the Action as `v0.1.1` with the same fail-closed validation boundary.
+
 ## v0.1.0 - 2026-10-18
 
 - Implemented offline `validate` and `replay` integration using the released

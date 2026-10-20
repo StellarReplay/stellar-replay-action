@@ -7,7 +7,7 @@
 <p align="center">
   <a href="https://github.com/StellarReplay/stellar-replay-action/actions/workflows/ci.yml"><img src="https://github.com/StellarReplay/stellar-replay-action/actions/workflows/ci.yml/badge.svg?branch=main" alt="Action CI status" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-4F8CFF" alt="Apache-2.0 license" /></a>
-  <a href="https://github.com/StellarReplay/stellar-replay/releases/tag/v0.1.0"><img src="https://img.shields.io/badge/core-v0.1.0-5BE7C4" alt="Core v0.1.0" /></a>
+  <a href="https://github.com/StellarReplay/stellar-replay/releases/tag/v0.1.1"><img src="https://img.shields.io/badge/core-v0.1.1-5BE7C4" alt="Core v0.1.1" /></a>
 </p>
 
 <p align="center">
@@ -21,7 +21,7 @@ GitHub Actions integration for [Stellar Replay](https://github.com/StellarReplay
 
 ## Status
 
-The Action is released as `v0.1.0`. It downloads the pinned core v0.1.0
+The Action is released as `v0.1.1`. It downloads the pinned core v0.1.1
 release, verifies its published SHA-256
 checksum, and runs `validate` or `replay` without wallet credentials or a live
 RPC endpoint. It remains a thin integration layer and does not copy the Go
@@ -30,17 +30,17 @@ engine.
 ## Usage
 
 ```yaml
-- uses: StellarReplay/stellar-replay-action@v0.1.0
+- uses: StellarReplay/stellar-replay-action@v0.1.1
   with:
     fixture: fixtures/get-health.json
     command: validate
-    core-version: 0.1.0
+    core-version: 0.1.1
 ```
 
 For deterministic replay:
 
 ```yaml
-- uses: StellarReplay/stellar-replay-action@v0.1.0
+- uses: StellarReplay/stellar-replay-action@v0.1.1
   with:
     fixture: fixtures/get-health.json
     command: replay
@@ -48,7 +48,7 @@ For deterministic replay:
 ```
 
 Supported runners are Linux amd64, Windows amd64, and macOS amd64, matching the
-core v0.1.0 release archives. The Action rejects unsupported core versions,
+core v0.1.1 release archives. The Action rejects unsupported core versions,
 missing fixtures, malformed command choices, missing release assets, and
 checksum mismatches. Core fixture semantics remain owned by the core repository.
 
@@ -63,7 +63,7 @@ requirements to Action tests.
 
 ## Versioning
 
-The Action has its own semantic version and major-version tags. `v0.1.0`
-supports core `v0.1.0` and fixture schema v1. Compatibility with the supported
+The Action has its own semantic version and major-version tags. `v0.1.1`
+supports core `v0.1.1` and fixture schema v1. Compatibility with the supported
 core CLI and fixture schema is documented in each Action release. It must never
 depend on an unreleased core commit.

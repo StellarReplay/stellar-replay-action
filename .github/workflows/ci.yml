@@ -36,14 +36,14 @@ jobs:
         with:
           fixture: tests/fixtures/get-health.json
           command: validate
-          core-version: 0.1.0
+          core-version: 0.1.1
       - name: Replay synthetic fixture
         uses: ./
         with:
           fixture: tests/fixtures/get-latest-ledger.json
           command: replay
           method: getLatestLedger
-          core-version: 0.1.0
+          core-version: 0.1.1
       - name: Reject missing fixture
         id: missing-fixture
         continue-on-error: true
@@ -51,7 +51,7 @@ jobs:
         with:
           fixture: tests/fixtures/does-not-exist.json
           command: validate
-          core-version: 0.1.0
+          core-version: 0.1.1
       - name: Assert missing fixture failed closed
         if: steps.missing-fixture.outcome != 'failure'
         shell: bash

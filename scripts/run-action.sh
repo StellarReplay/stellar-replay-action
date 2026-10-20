@@ -3,11 +3,11 @@ set -euo pipefail
 
 fixture="${STELLAR_REPLAY_FIXTURE:?fixture is required}"
 command_name="${STELLAR_REPLAY_COMMAND:-validate}"
-version="${STELLAR_REPLAY_CORE_VERSION:-0.1.0}"
+version="${STELLAR_REPLAY_CORE_VERSION:-0.1.1}"
 repository="${STELLAR_REPLAY_CORE_REPOSITORY:-StellarReplay/stellar-replay}"
 
 case "$version" in
-  0.1.0) ;;
+  0.1.1) ;;
   *) echo "::error::unsupported Stellar Replay core version: $version" >&2; exit 2 ;;
 esac
 case "$command_name" in
