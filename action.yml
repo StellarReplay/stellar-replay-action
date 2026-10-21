@@ -24,7 +24,7 @@ inputs:
   core-version:
     description: Released core version to download.
     required: false
-    default: 0.1.0
+    default: 0.1.1
   core-repository:
     description: Core repository that publishes the release.
     required: false

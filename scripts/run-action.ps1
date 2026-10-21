@@ -1,10 +1,10 @@
 $ErrorActionPreference = 'Stop'
 $fixture = $env:STELLAR_REPLAY_FIXTURE
 $commandName = if ($env:STELLAR_REPLAY_COMMAND) { $env:STELLAR_REPLAY_COMMAND } else { 'validate' }
-$version = if ($env:STELLAR_REPLAY_CORE_VERSION) { $env:STELLAR_REPLAY_CORE_VERSION } else { '0.1.0' }
+$version = if ($env:STELLAR_REPLAY_CORE_VERSION) { $env:STELLAR_REPLAY_CORE_VERSION } else { '0.1.1' }
 $repository = if ($env:STELLAR_REPLAY_CORE_REPOSITORY) { $env:STELLAR_REPLAY_CORE_REPOSITORY } else { 'StellarReplay/stellar-replay' }
 if (-not $fixture) { throw 'fixture is required' }
-if ($version -ne '0.1.0') { Write-Error "unsupported Stellar Replay core version: $version"; exit 2 }
+if ($version -ne '0.1.1') { Write-Error "unsupported Stellar Replay core version: $version"; exit 2 }
 if ($commandName -notin @('validate','replay')) { Write-Error "unsupported Stellar Replay command: $commandName"; exit 2 }
 if (-not (Test-Path -LiteralPath $fixture -PathType Leaf)) { Write-Error "fixture not found: $fixture"; exit 2 }
 $workdir = Join-Path $env:RUNNER_TEMP 'stellar-replay-action'
